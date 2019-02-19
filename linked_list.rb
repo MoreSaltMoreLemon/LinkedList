@@ -59,9 +59,49 @@ class LinkedList
   end
 
   # Removes value node from tail of Linked List
+  # Returns value of old tail Node
+  # #pop_last : -> Any
+  def pop_last
+    if @head == @tail
+      last_node = @tail
+      @head = nil
+      @tail = nil
+      @length -= 1
+
+      last_node.value
+    else
+      node = @head
+      until node.next == @tail
+        node = node.next
+      end
+      last_node = @tail
+      @tail = node
+      @tail.next = nil
+      @length -= 1
+
+      last_node.value
+    end
+  end
+
+  # Returns the last value of the LinkedList, or
+  # if given an integer value, the last
   # #pop : -> Any
-  # def pop
-  # end
+  # #pop : (Integer) -> [Any]
+  def pop(n = 1)
+    raise TypeError unless n.instance_of?(Fixnum)
+
+    if n == 1
+      self.pop_last
+    elsif n > 1
+      n = n > self.length ? self.length : n
+
+      popped = []
+      (1..n).each {|v| popped << self.pop_last }
+      popped.reverse
+    else
+      raise RangeError
+    end
+  end
 
   
   # Adds value node to head of LinkedList
@@ -97,9 +137,16 @@ class LinkedList
 
   # Provides #each method for use by Enumerable methods
   # allowing for traversal, sorting, and searching
-  # #each
-  # def each
-  # end
+  # Returns self, unmodified
+  # #each : -> LinkedList: instance
+  def each(&block)
+    node = @head
+    until node.nil?
+      block.(node.value)
+      node = node.next
+    end
+    self  # for chaining
+  end
 
   # Provides <=> comparator operator for use by Enumerable
   # methods #max, #min, and #sort

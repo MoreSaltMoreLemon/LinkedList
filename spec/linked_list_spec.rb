@@ -80,5 +80,47 @@ RSpec.describe 'LinkedList' do
       end
     end
 
+    context '#pop' do
+      it 'should have a method, #pop' do
+        expect(instance).to respond_to(:pop)
+      end
+
+      it 'should decrease the length by the number of values popped' do
+        length = instance.length
+        instance.pop
+        expect(instance.length).to eq(length - 1)
+        instance.pop(2)
+        expect(instance.length).to eq(length - 3)
+      end
+
+      it 'should accept a range or an positive integer value' do
+        expect(instance).to respond_to(:pop)
+        expect(instance).to respond_to(:pop).with(1).arguments
+        expect { instance.pop(2) }.not_to raise_error
+        expect { instance.pop(2.0) }.to raise_error(TypeError)
+        expect { instance.pop("2") }.to raise_error(TypeError)
+        expect { instance.pop(nil) }.to raise_error(TypeError)
+        expect { instance.pop(true) }.to raise_error(TypeError)
+        expect { instance.pop(-1) }.to raise_error(RangeError)
+      end
+    end
+
+    context '#each' do
+      it 'should have a method #each' do
+        expect(instance).to respond_to(:each)
+      end
+
+      it 'should apply a block to each value in the collection' do
+        test = []
+        answer = [1, 2, 3]
+        instance.each {|v| test << v}
+        expect(test).to eq(answer)
+      end
+
+      it 'should return itself after iterating through the collection' do
+        instance_id = instance.object_id
+        expect(instance.each {|v| v}.object_id).to eq(instance_id)
+      end
+    end
   end
 end
