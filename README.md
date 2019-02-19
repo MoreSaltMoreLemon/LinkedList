@@ -30,6 +30,7 @@
 * added the push method and tests
 * added the pop method and tests
   * made it accept no arguments or an integer
+* added shift and unshift methods and tests
 
 #Issues and Questions encountered so far:
 * `next` keyword when used as argument name doesn't work terribly well. It is a reserved keyword. D'oh.

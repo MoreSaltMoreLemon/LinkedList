@@ -1,8 +1,8 @@
 require 'pry'
 
 class LinkedList
-  # include Enumerable
-  # extend  Enumerable
+  include Enumerable
+  extend  Enumerable
   
   attr_reader :length
   # .new : (Any) -> LinkedList
@@ -106,14 +106,61 @@ class LinkedList
   
   # Adds value node to head of LinkedList
   # #unshift : (Any) -> LinkedList
-  # def unshift(value)
-  # end
+  def unshift(*values)
+    head = nil
+    tail = nil
 
+    values.reverse_each do |value|
+      head = Node.new(value, head)
+      tail = head if tail.nil?
+    end
+
+    tail.next = @head
+    @head = head
+    @length += values.length
+    self
+  end
 
   # Removes value node from head of Linked List
+  # Returns value of old head Node
+  # #shift_first : -> Any
+  def shift_first
+    if @head == @tail
+      last_node = @tail
+      @head = nil
+      @tail = nil
+      @length -= 1
+
+      last_node.value
+    else
+      node = @head
+      @head = node.next
+      @length -= 1
+
+      node.value
+    end
+  end
+
+  # Removes value node(s) from head of Linked List
+  # Returns the first value of the LinkedList, or
+  # if given an integer value, the first n values
   # #shift : -> Any
-  # def shift
-  # end
+  # #unshift : (Integer) -> [Any]
+  def shift(n = 1)
+    raise TypeError unless n.instance_of?(Fixnum)
+
+    if n == 1
+      self.shift_first
+    elsif n > 1
+      n = n > self.length ? self.length : n
+
+      shifted = []
+      (1..n).each {|v| shifted << self.shift_first }
+      shifted
+    else
+      raise RangeError
+    end
+  end
 
   # def insert
   # end

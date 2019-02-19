@@ -105,6 +105,58 @@ RSpec.describe 'LinkedList' do
       end
     end
 
+    context '#unshift' do
+      it 'should have a method #unshift' do
+        expect(instance).to respond_to(:unshift)
+      end
+      it 'should add value(s) to the head' do
+        more_values = [3, 4, 5]
+        expect(instance.unshift(*more_values).first).to eq(more_values.first)
+      end
+
+      it 'should accept multiple arguments' do
+        expect(instance).to respond_to(:unshift).with(1).arguments
+        expect(instance).to respond_to(:unshift).with(4).arguments
+        expect(instance).to respond_to(:unshift).with(33).arguments
+      end
+
+      it 'should alter the original instance' do
+        instance_id = instance.object_id
+        expect(instance.unshift(1).object_id).to eq(instance_id)
+      end
+
+      it 'should increase the length of the linked list by the number of values given' do
+        length = instance.length
+        more_values = [3, 33, 333, 3333]
+        expect(instance.unshift(*more_values).length).to eq(length + more_values.length)
+      end
+    end
+
+    context '#shift' do
+      it 'should have a method, #shift' do
+        expect(instance).to respond_to(:shift)
+      end
+
+      it 'should decrease the length by the number of values shifted' do
+        length = instance.length
+        instance.shift
+        expect(instance.length).to eq(length - 1)
+        instance.shift(2)
+        expect(instance.length).to eq(length - 3)
+      end
+
+      it 'should accept a range or an positive integer value' do
+        expect(instance).to respond_to(:shift)
+        expect(instance).to respond_to(:shift).with(1).arguments
+        expect { instance.shift(2) }.not_to raise_error
+        expect { instance.shift(2.0) }.to raise_error(TypeError)
+        expect { instance.shift("2") }.to raise_error(TypeError)
+        expect { instance.shift(nil) }.to raise_error(TypeError)
+        expect { instance.shift(true) }.to raise_error(TypeError)
+        expect { instance.shift(-1) }.to raise_error(RangeError)
+      end
+    end
+
     context '#each' do
       it 'should have a method #each' do
         expect(instance).to respond_to(:each)
