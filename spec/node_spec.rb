@@ -1,5 +1,3 @@
-# RSpec::Expectations.configuration.on_potential_false_positives = :nothing
-
 RSpec.describe 'Node' do
   subject { Node }
   let(:instance) { subject.new("value", "next") }

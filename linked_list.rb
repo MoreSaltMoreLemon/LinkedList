@@ -8,29 +8,67 @@ class LinkedList
   # .new : (Any) -> LinkedList
   def initialize(*values)
     @length = values.length
-    @head = nil
 
+    @head = nil
+    @tail = nil
     values.reverse_each do |value|
       @head = Node.new(value, @head)
+      @tail = @head if @tail.nil?
     end
+  end
 
-    @current = @head
+  # Returns the head Node of the LinkedList
+  # #head : -> Node: instance
+  def head
+    @head
+  end
+
+  # Returns the head value of the LinkedList
+  # #first : -> Any
+  def first
+    self.head.value
+  end
+
+  # Returns the tail Node of the LinkedList
+  # #tail : -> Node: instance
+  def tail
+    @tail
+  end
+
+  # Returns the tail value of the LinkedList
+  # #last : -> Any
+  def last
+    self.tail.value
   end
 
   # Adds value node to tail of LinkedList
   # #push : (Any) -> LinkedList
-  # def push(value)
-  # end
+  def push(*values)
+    head = nil
+    tail = nil
 
-  # Adds value node to head of LinkedList
-  # #unshift : (Any) -> LinkedList
-  # def unshift(value)
-  # end
+    values.reverse_each do |value|
+      head = Node.new(value, head)
+      tail = head if tail.nil?
+    end
+
+    @tail.next = head
+    @tail = tail
+    @length += values.length
+    self
+  end
 
   # Removes value node from tail of Linked List
   # #pop : -> Any
   # def pop
   # end
+
+  
+  # Adds value node to head of LinkedList
+  # #unshift : (Any) -> LinkedList
+  # def unshift(value)
+  # end
+
 
   # Removes value node from head of Linked List
   # #shift : -> Any
@@ -68,12 +106,7 @@ class LinkedList
   # def <=>
   # end
 
-  # Returns the head value of the LinkedList
-  # #head : -> Node: instance
-  # def head
-  # end
-
-  # alias_method :first, :head
+  
 
   # converts LinkedList to Array
   # #to_a : -> Array: instance
