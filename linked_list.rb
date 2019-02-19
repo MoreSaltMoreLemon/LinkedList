@@ -15,6 +15,8 @@ class LinkedList
       @head = Node.new(value, @head)
       @tail = @head if @tail.nil?
     end
+
+    @current_node = @head
   end
 
   # Returns the head Node of the LinkedList
@@ -39,6 +41,16 @@ class LinkedList
   # #last : -> Any
   def last
     self.tail.value
+  end
+
+  def current
+    @current_node
+  end
+
+  # Returns the next value in the sequence
+  # #next : -> Node: instance
+  def next
+    @current_node = @current_node.next
   end
 
   # Adds value node to tail of LinkedList
@@ -102,7 +114,6 @@ class LinkedList
       raise RangeError
     end
   end
-
   
   # Adds value node to head of LinkedList
   # #unshift : (Any) -> LinkedList
@@ -162,16 +173,24 @@ class LinkedList
     end
   end
 
-  # def insert
-  # end
+  # Inserts nodes after current node
+  # #insert : (Any) -> LinkedList: instance
+  def insert(*values)
+    values.each do |value|
+      @current_node = @current_node.insert(value)
+      @length += 1
+    end
+    self
+  end
+
 
   # def insert_before
   # end
 
-  # def insert_before(node)
+  # def insert_before(node, value)
   # end
 
-  # def insert_after(node)
+  # def insert_after(node, value)
   # end
 
   # Removes current node from LinkedList

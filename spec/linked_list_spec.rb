@@ -53,6 +53,13 @@ RSpec.describe 'LinkedList' do
       end
     end
 
+    context '#next' do
+      it 'should return the next value in the sequence' do
+        expect(instance.next.value).to eq(init_values[1])
+        expect(instance.next.value).to eq(init_values[2])
+      end
+    end
+
     context '#push' do
       it 'should have a method #push' do
         expect(instance).to respond_to(:push)
@@ -172,6 +179,22 @@ RSpec.describe 'LinkedList' do
       it 'should return itself after iterating through the collection' do
         instance_id = instance.object_id
         expect(instance.each {|v| v}.object_id).to eq(instance_id)
+      end
+    end
+
+    context '#current' do
+      it 'should return the current node' do
+        expect(instance.current).to eq(instance.instance_variable_get(:@current_node))
+        instance.next
+        expect(instance.current).to eq(instance.instance_variable_get(:@current_node))
+      end
+    end
+
+    context '#insert' do
+      it 'should insert a value after the current node' do
+        current_node = instance.current
+        binding.pry
+        expect(instance.insert("value")).to equal(current_node.next)
       end
     end
   end

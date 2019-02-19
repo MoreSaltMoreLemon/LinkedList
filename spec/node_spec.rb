@@ -39,4 +39,25 @@ RSpec.describe 'Node' do
       expect(instance.next).to eq("new value")
     end
   end
+
+  context '#insert' do
+    it 'should have an #insert method' do
+      expect(instance).to respond_to(:insert)
+    end
+
+    it 'should accept a single argument' do
+      expect(instance).to respond_to(:insert).with(1).arguments
+    end
+
+    it "should connect the new node with the current node's previous next value" do
+      initial_next_node = instance.next
+      instance.insert("value")
+      expect(instance.next.next).to equal(initial_next_node)
+    end
+
+    it "should set the new node's value equal to the argument given" do
+      instance.insert("value")
+      expect(instance.next.value).to eq("value")
+    end
+  end
 end
