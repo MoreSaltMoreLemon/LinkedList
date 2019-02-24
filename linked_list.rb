@@ -1,8 +1,8 @@
 require 'pry'
-
+require_relative 'node'
 class LinkedList
-  include Enumerable
-  extend  Enumerable
+  # include Enumerable
+  # extend  Enumerable
   
   attr_reader :length
   # .new : (Any) -> LinkedList
@@ -211,3 +211,7 @@ class LinkedList
   # def to_s
   # end
 end
+
+
+binding.pry
+0

@@ -174,5 +174,14 @@ RSpec.describe 'LinkedList' do
         expect(instance.each {|v| v}.object_id).to eq(instance_id)
       end
     end
+
+    context '#to_s' do
+      it 'should return a string' do
+      end
+
+      it 'should use the format \[H v1 > v2 > v3 T\]' do
+        
+      end
+    end
   end
 end
