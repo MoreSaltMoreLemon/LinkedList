@@ -6,4 +6,9 @@ class Node
     @value = value
     @next = next_node
   end
+
+  def insert(value)
+    self.next = Node.new(value, self.next)
+  end
+
 end

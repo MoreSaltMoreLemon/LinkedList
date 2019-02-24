@@ -39,4 +39,18 @@ RSpec.describe 'Node' do
       expect(instance.next).to eq("new value")
     end
   end
+
+  context '#insert' do
+    it 'should accept an input' do
+      expect(instance).to respond_to(:insert).with(1).arguments
+    end
+
+    it 'should insert a value between the given node and the next node' do
+      n1 = instance.insert("another value")
+      n2 = instance.insert("yet another value")
+      next_node = instance.next
+      expect(instance.next).to equal(n2)
+      expect(instance.next.next).to equal(n1)
+    end
+  end
 end
