@@ -177,10 +177,12 @@ RSpec.describe 'LinkedList' do
 
     context '#to_s' do
       it 'should return a string' do
+        expect(instance.to_s.class).to be(String)
       end
 
-      it 'should use the format \[H v1 > v2 > v3 T\]' do
-        
+      it 'should use the format \[v1 > v2 > v3 \]' do
+        expect(subject.new(1, 2, 3).to_s).to eq("\[1 > 1 > 2 > 3\]")
+
       end
     end
   end

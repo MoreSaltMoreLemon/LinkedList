@@ -208,10 +208,21 @@ class LinkedList
   # end
 
   # Implements #to_s method so that it can be printed
-  # def to_s
-  # end
+  def to_s
+    if @head.nil?
+      return "[]"
+    else
+      node = @head
+      str = "[#{node.value}"
+      until node.nil?
+        str += " > #{node.value}"
+        node = node.next
+      end
+      str += "]"
+    end
+  end
 end
 
 
-binding.pry
+# binding.pry
 0
