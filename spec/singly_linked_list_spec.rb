@@ -1,7 +1,7 @@
 require 'pry'
 
-RSpec.describe 'LinkedList' do
-  subject { LinkedList }
+RSpec.describe 'SinglyLinkedList' do
+  subject { SinglyLinkedList }
   let(:init_values) { [1, 2, 3] }
   let(:instance) { subject.new(*init_values) }
 
@@ -162,6 +162,25 @@ RSpec.describe 'LinkedList' do
         instance_id = instance.object_id
         expect(instance.each {|v| v}.object_id).to eq(instance_id)
       end
+    end
+
+    context '#map' do
+      it 'should have a method #map' do
+        expect(instance).to respond_to(:map)
+      end
+
+      it 'should return a transformed linked list' do
+        map_fn = -> (v) {v * 2}
+        mapped_list = instance.map(&map_fn)
+        expect(mapped_list.head.value).to eq(map_fn.(init_values[0]))
+      end
+
+      it 'should not modify the original linked list' do
+        map_fn = -> (v) {v}
+        mapped_list = instance.map(&map_fn)
+        expect(mapped_list).not_to equal(instance)
+      end
+
     end
 
     context '#to_a' do

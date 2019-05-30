@@ -1,7 +1,7 @@
 require 'pry'
 require_relative 'node'
 
-class LinkedList
+class SinglyLinkedList
   include Enumerable
   extend  Enumerable
   
@@ -54,11 +54,21 @@ class LinkedList
       tail = head if tail.nil?
     end
 
-    @tail.next = head
+    # if the SLL is empty
+    @head = head if @head.nil?
+    if @tail.nil?
+      @tail = head
+    else 
+      @tail.next = head
+    end
+
     @tail = tail
     @length += values.length
     self
   end
+
+  # Adds << alias for #push method
+  alias_method :<<, :push
 
   # Removes value node from tail of Linked List
   # Returns value of old tail Node
@@ -157,12 +167,26 @@ class LinkedList
     self  # for chaining
   end
 
+  # Implements #map method for Singly Linked List
+  # while preserving the original SLL
+  # Returns transformed SLL
+  # #map : -> LinkedList: instance
+  def map(&block)
+    mapped = SinglyLinkedList.new()
+    node = @head
+    until node.nil?
+      mapped << block.(node.value)
+      node = node.next
+    end
+    mapped  # for chaining
+  end
+
   # converts LinkedList to Array
   # #to_a : -> Array: instance
   def to_a
-    self.map do |node|
-      node
-    end
+    arr = []
+    self.each {|v| arr << v }
+    arr
   end
 
   # Implements #to_s method so that it can be printed

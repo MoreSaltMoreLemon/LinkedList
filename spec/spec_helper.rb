@@ -1,5 +1,5 @@
-require_relative "../node"
-require_relative "../linked_list"
+require_relative "../lists/linked_list/singly_linked_list/node"
+require_relative "../lists/linked_list/singly_linked_list/singly_linked_list"
 
 RSpec::Expectations.configuration.on_potential_false_positives = :nothing
 
