@@ -116,7 +116,7 @@ class SinglyLinkedList
   # Removes value node from head of Linked List
   # Returns value of old head Node
   # #shift_first : -> Any
-  def shift_first
+  def shift
     if @head == @tail
       last_node = @tail
       @head = nil
