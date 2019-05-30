@@ -1,6 +1,7 @@
 # Ruby Data Structures
 
 ## Singly Linked List
+Implementation of Singly Linked List that extends the Enumerable module. Complete coverage with RSpect unit tests.
 
 ### Methods
 * `#head`: returns first node

@@ -135,6 +135,7 @@ RSpec.describe 'SinglyLinkedList' do
 
     context '#each' do
       it 'should have a method #each' do
+        binding.pry
         expect(instance).to respond_to(:each)
       end
 
