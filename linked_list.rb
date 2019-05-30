@@ -1,10 +1,12 @@
 require 'pry'
 require_relative 'node'
+
 class LinkedList
-  # include Enumerable
-  # extend  Enumerable
+  include Enumerable
+  extend  Enumerable
   
   attr_reader :length
+
   # .new : (Any) -> LinkedList
   def initialize(*values)
     @length = values.length
@@ -42,7 +44,7 @@ class LinkedList
   end
 
   # Adds value node to tail of LinkedList
-  # #push : (Any) -> LinkedList
+  # #push : (Any[]) -> LinkedList
   def push(*values)
     head = nil
     tail = nil
@@ -61,12 +63,12 @@ class LinkedList
   # Removes value node from tail of Linked List
   # Returns value of old tail Node
   # #pop_last : -> Any
-  def pop_last
+  def pop
     if @head == @tail
       last_node = @tail
       @head = nil
       @tail = nil
-      @length -= 1
+      @length = 0
 
       last_node.value
     else
@@ -80,26 +82,6 @@ class LinkedList
       @length -= 1
 
       last_node.value
-    end
-  end
-
-  # Returns the last value of the LinkedList, or
-  # if given an integer value, the last
-  # #pop : -> Any
-  # #pop : (Integer) -> [Any]
-  def pop(n = 1)
-    raise TypeError unless n.instance_of?(Fixnum)
-
-    if n == 1
-      self.pop_last
-    elsif n > 1
-      n = n > self.length ? self.length : n
-
-      popped = []
-      (1..n).each {|v| popped << self.pop_last }
-      popped.reverse
-    else
-      raise RangeError
     end
   end
 
@@ -162,26 +144,6 @@ class LinkedList
     end
   end
 
-  # def insert
-  # end
-
-  # def insert_before
-  # end
-
-  # def insert_before(node)
-  # end
-
-  # def insert_after(node)
-  # end
-
-  # Removes current node from LinkedList
-  # def delete
-  # end
-
-  # Removes specified node from LinkedList
-  # def delete(node)
-  # end
-
   # Provides #each method for use by Enumerable methods
   # allowing for traversal, sorting, and searching
   # Returns self, unmodified
@@ -195,17 +157,13 @@ class LinkedList
     self  # for chaining
   end
 
-  # Provides <=> comparator operator for use by Enumerable
-  # methods #max, #min, and #sort
-  # def <=>
-  # end
-
-  
-
   # converts LinkedList to Array
   # #to_a : -> Array: instance
-  # def to_a
-  # end
+  def to_a
+    self.map do |node|
+      node
+    end
+  end
 
   # Implements #to_s method so that it can be printed
   def to_s

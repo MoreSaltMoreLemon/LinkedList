@@ -1,3 +1,5 @@
+require 'pry'
+
 RSpec.describe 'LinkedList' do
   subject { LinkedList }
   let(:init_values) { [1, 2, 3] }
@@ -85,23 +87,10 @@ RSpec.describe 'LinkedList' do
         expect(instance).to respond_to(:pop)
       end
 
-      it 'should decrease the length by the number of values popped' do
+      it 'should decrease the length 1' do
         length = instance.length
         instance.pop
         expect(instance.length).to eq(length - 1)
-        instance.pop(2)
-        expect(instance.length).to eq(length - 3)
-      end
-
-      it 'should accept a range or an positive integer value' do
-        expect(instance).to respond_to(:pop)
-        expect(instance).to respond_to(:pop).with(1).arguments
-        expect { instance.pop(2) }.not_to raise_error
-        expect { instance.pop(2.0) }.to raise_error(TypeError)
-        expect { instance.pop("2") }.to raise_error(TypeError)
-        expect { instance.pop(nil) }.to raise_error(TypeError)
-        expect { instance.pop(true) }.to raise_error(TypeError)
-        expect { instance.pop(-1) }.to raise_error(RangeError)
       end
     end
 
@@ -175,6 +164,25 @@ RSpec.describe 'LinkedList' do
       end
     end
 
+    context '#to_a' do
+      it 'should have a method #to_a' do
+        expect(instance).to respond_to(:to_a)
+      end
+
+      it 'should return an array' do
+        expect(instance.to_a.kind_of?(Array)).to be(true)
+      end
+
+      it 'should return an array matching the values of the list' do
+        expect(instance.to_a).to eq(init_values)
+      end
+
+      it 'should return an empty array if there are no list nodes' do
+        empty = subject.new()
+        expect(empty.to_a).to eq([])
+      end
+    end
+
     context '#to_s' do
       it 'should return a string' do
         expect(instance.to_s.class).to be(String)
@@ -182,7 +190,6 @@ RSpec.describe 'LinkedList' do
 
       it 'should use the format \[v1 > v2 > v3 \]' do
         expect(subject.new(1, 2, 3).to_s).to eq("\[1 > 1 > 2 > 3\]")
-
       end
     end
   end
