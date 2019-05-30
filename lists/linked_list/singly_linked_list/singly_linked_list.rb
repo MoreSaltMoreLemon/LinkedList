@@ -133,27 +133,6 @@ class SinglyLinkedList
     end
   end
 
-  # Removes value node(s) from head of Linked List
-  # Returns the first value of the LinkedList, or
-  # if given an integer value, the first n values
-  # #shift : -> Any
-  # #unshift : (Integer) -> [Any]
-  def shift(n = 1)
-    raise TypeError unless n.instance_of?(Fixnum)
-
-    if n == 1
-      self.shift_first
-    elsif n > 1
-      n = n > self.length ? self.length : n
-
-      shifted = []
-      (1..n).each {|v| shifted << self.shift_first }
-      shifted
-    else
-      raise RangeError
-    end
-  end
-
   # Provides #each method for use by Enumerable methods
   # allowing for traversal, sorting, and searching
   # Returns self, unmodified
@@ -205,6 +184,4 @@ class SinglyLinkedList
   end
 end
 
-
-# binding.pry
 0

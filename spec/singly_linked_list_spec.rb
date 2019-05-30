@@ -130,19 +130,6 @@ RSpec.describe 'SinglyLinkedList' do
         length = instance.length
         instance.shift
         expect(instance.length).to eq(length - 1)
-        instance.shift(2)
-        expect(instance.length).to eq(length - 3)
-      end
-
-      it 'should accept a range or an positive integer value' do
-        expect(instance).to respond_to(:shift)
-        expect(instance).to respond_to(:shift).with(1).arguments
-        expect { instance.shift(2) }.not_to raise_error
-        expect { instance.shift(2.0) }.to raise_error(TypeError)
-        expect { instance.shift("2") }.to raise_error(TypeError)
-        expect { instance.shift(nil) }.to raise_error(TypeError)
-        expect { instance.shift(true) }.to raise_error(TypeError)
-        expect { instance.shift(-1) }.to raise_error(RangeError)
       end
     end
 
