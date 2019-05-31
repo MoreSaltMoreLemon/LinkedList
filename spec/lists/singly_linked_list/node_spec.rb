@@ -1,3 +1,6 @@
+require_relative "../../../lists/linked_list/singly_linked_list/node"
+# require_relative "../lists/linked_list/singly_linked_list/singly_linked_list"
+
 RSpec.describe 'Node' do
   subject { Node }
   let(:instance) { subject.new("value", "next") }

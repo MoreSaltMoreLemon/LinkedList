@@ -1,4 +1,4 @@
-require 'pry'
+require_relative "../../../lists/linked_list/singly_linked_list/singly_linked_list"
 
 RSpec.describe 'SinglyLinkedList' do
   subject { SinglyLinkedList }
