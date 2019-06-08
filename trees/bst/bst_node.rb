@@ -1,3 +1,4 @@
+require 'pry'
 class BSTNode
   attr_accessor :parent, :left, :right, :val
 
@@ -5,6 +6,11 @@ class BSTNode
     @val = val
   end
 
+  # inserts values down the tree
+  # larger -> right
+  # smaller -> left
+  # equal -> no duplicates
+  # #push_down :: (val: number) -> nil
   def push_down(val)
     if (self.val > val)
       if self.left.nil?
