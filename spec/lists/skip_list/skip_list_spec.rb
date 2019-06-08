@@ -1,4 +1,3 @@
-require 'pry'
 require_relative "../../../lists/linked_list/skip_list/skip_list"
 # binding.pry
 RSpec.describe 'SkipList' do
@@ -10,9 +9,9 @@ RSpec.describe 'SkipList' do
       expect(subject).to respond_to(:new).with(1).arguments
     end
 
-    it 'should accept multiple values'
+    # it 'should accept multiple values'
 
-    it 'should build a skip list from an array'
+    # it 'should build a skip list from an array'
   end
 
   context '#insert' do
@@ -20,9 +19,7 @@ RSpec.describe 'SkipList' do
       expect(instance).to respond_to(:insert).with(1).argument
     end
 
-    it 'should insert a value into the skip list' do
-      
-    end
+    # it 'should insert a value into the skip list'
   end
 
   context '#find' do
